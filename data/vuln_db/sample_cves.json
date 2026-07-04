@@ -1,0 +1,180 @@
+{
+  "cves": [
+    {
+      "cve_id": "CVE-2021-44228",
+      "description": "Apache Log4j2 JNDI features do not protect against attacker-controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled (Log4Shell).",
+      "cvss_score": 10.0,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "severity": "Critical",
+      "published_date": "2021-12-10T00:00:00",
+      "modified_date": "2023-04-03T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:apache:log4j:*:*:*:*:*:*:*:*", "versionStartIncluding": "2.0", "versionEndExcluding": "2.15.0"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": true,
+      "patch_available": true,
+      "references": ["https://logging.apache.org/log4j/2.x/security.html", "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"]
+    },
+    {
+      "cve_id": "CVE-2014-0160",
+      "description": "The TLS and DTLS implementations in OpenSSL 1.0.1 before 1.0.1g do not properly handle Heartbeat Extension packets, which allows remote attackers to obtain sensitive information from process memory (Heartbleed).",
+      "cvss_score": 7.5,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "severity": "High",
+      "published_date": "2014-04-07T00:00:00",
+      "modified_date": "2022-11-10T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:openssl:openssl:*:*:*:*:*:*:*:*", "versionStartIncluding": "1.0.1", "versionEndExcluding": "1.0.1g"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": true,
+      "patch_available": true,
+      "references": ["https://heartbleed.com/", "https://nvd.nist.gov/vuln/detail/CVE-2014-0160"]
+    },
+    {
+      "cve_id": "CVE-2017-0144",
+      "description": "The SMBv1 server in Microsoft Windows allows remote attackers to execute arbitrary code via crafted packets (EternalBlue), used by WannaCry ransomware.",
+      "cvss_score": 8.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "severity": "High",
+      "published_date": "2017-03-16T00:00:00",
+      "modified_date": "2019-10-03T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:o:microsoft:windows:*:*:*:*:*:*:*:*"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": true,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2017-0144"]
+    },
+    {
+      "cve_id": "CVE-2018-15473",
+      "description": "OpenSSH through 7.7 is prone to a user enumeration vulnerability due to not delaying bailout for an invalid authenticating user until after the packet containing the request has been fully parsed.",
+      "cvss_score": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "severity": "Medium",
+      "published_date": "2018-08-17T00:00:00",
+      "modified_date": "2021-06-29T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:openbsd:openssh:*:*:*:*:*:*:*:*", "versionEndIncluding": "7.7"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": false,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2018-15473"]
+    },
+    {
+      "cve_id": "CVE-2019-0708",
+      "description": "A remote code execution vulnerability exists in Remote Desktop Services when an unauthenticated attacker connects using RDP and sends specially crafted requests (BlueKeep).",
+      "cvss_score": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "severity": "Critical",
+      "published_date": "2019-05-16T00:00:00",
+      "modified_date": "2020-10-15T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:o:microsoft:windows:*:*:*:*:*:*:*:*"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": true,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2019-0708"]
+    },
+    {
+      "cve_id": "CVE-2021-3156",
+      "description": "Sudo before 1.9.5p2 contains an off-by-one error that can result in a heap-based buffer overflow, allowing privilege escalation to root (Baron Samedit).",
+      "cvss_score": 7.8,
+      "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "severity": "High",
+      "published_date": "2021-01-26T00:00:00",
+      "modified_date": "2023-11-07T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:sudo_project:sudo:*:*:*:*:*:*:*:*", "versionEndExcluding": "1.9.5p2"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": false,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2021-3156"]
+    },
+    {
+      "cve_id": "CVE-2020-1938",
+      "description": "Apache Tomcat AJP Connector allows an attacker to read/process files as JSPs via the AJP protocol (Ghostcat).",
+      "cvss_score": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "severity": "Critical",
+      "published_date": "2020-02-24T00:00:00",
+      "modified_date": "2022-07-25T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:apache:tomcat:*:*:*:*:*:*:*:*", "versionStartIncluding": "9.0.0", "versionEndExcluding": "9.0.31"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": true,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2020-1938"]
+    },
+    {
+      "cve_id": "CVE-2022-22965",
+      "description": "A Spring MVC or Spring WebFlux application running on JDK 9+ may be vulnerable to remote code execution via data binding (Spring4Shell).",
+      "cvss_score": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "severity": "Critical",
+      "published_date": "2022-04-01T00:00:00",
+      "modified_date": "2023-05-11T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:vmware:spring_framework:*:*:*:*:*:*:*:*", "versionEndExcluding": "5.3.18"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": true,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2022-22965"]
+    },
+    {
+      "cve_id": "CVE-2017-5638",
+      "description": "The Jakarta Multipart parser in Apache Struts 2 has incorrect exception handling and error-message generation during file-upload attempts, allowing remote code execution via a crafted Content-Type header.",
+      "cvss_score": 10.0,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "severity": "Critical",
+      "published_date": "2017-03-11T00:00:00",
+      "modified_date": "2021-02-24T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:apache:struts:*:*:*:*:*:*:*:*", "versionStartIncluding": "2.3.5", "versionEndIncluding": "2.3.31"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": true,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2017-5638"]
+    },
+    {
+      "cve_id": "CVE-2019-11043",
+      "description": "In PHP-FPM, an environment where nginx forwards to a PHP-FPM instance can allow attackers to cause remote code execution by sending crafted URLs.",
+      "cvss_score": 8.7,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:H",
+      "severity": "High",
+      "published_date": "2019-10-28T00:00:00",
+      "modified_date": "2022-06-13T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*", "versionStartIncluding": "7.1.0", "versionEndExcluding": "7.1.33"}
+      ],
+      "exploit_available": true,
+      "actively_exploited": false,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2019-11043"]
+    },
+    {
+      "cve_id": "CVE-2016-6210",
+      "description": "OpenSSH sshd allows remote attackers to determine valid usernames by leveraging the timing difference in password hashing (user enumeration).",
+      "cvss_score": 5.9,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "severity": "Medium",
+      "published_date": "2016-08-07T00:00:00",
+      "modified_date": "2017-07-01T00:00:00",
+      "cpe_matches": [
+        {"cpe": "cpe:2.3:a:openbsd:openssh:*:*:*:*:*:*:*:*", "versionEndExcluding": "7.3"}
+      ],
+      "exploit_available": false,
+      "actively_exploited": false,
+      "patch_available": true,
+      "references": ["https://nvd.nist.gov/vuln/detail/CVE-2016-6210"]
+    }
+  ]
+}

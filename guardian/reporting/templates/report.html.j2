@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guardian USB — Vulnerability Report</title>
+<style>
+  :root { --crit:#c0392b; --high:#e67e22; --med:#f1c40f; --low:#3498db; --bg:#0f1419; --panel:#1b232c; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+         margin:0; background:#f4f6f8; color:#1c2833; line-height:1.5; }
+  header { background:linear-gradient(135deg,#1b263b,#2c3e50); color:#fff; padding:28px 40px; }
+  header h1 { margin:0; font-size:26px; letter-spacing:.5px; }
+  header .sub { opacity:.8; margin-top:6px; font-size:13px; }
+  main { max-width:1100px; margin:0 auto; padding:24px 40px 60px; }
+  section { background:#fff; border-radius:10px; padding:22px 26px; margin:20px 0;
+            box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  section h2 { margin-top:0; font-size:19px; border-bottom:2px solid #ecf0f1; padding-bottom:8px; }
+  .cards { display:flex; gap:16px; flex-wrap:wrap; }
+  .card { flex:1; min-width:130px; background:#f8f9fb; border-radius:8px; padding:16px; text-align:center;
+          border-left:5px solid #7f8c8d; }
+  .card .num { font-size:30px; font-weight:700; }
+  .card .lbl { font-size:12px; text-transform:uppercase; color:#7f8c8d; letter-spacing:.5px; }
+  .card.crit { border-left-color:var(--crit); } .card.crit .num { color:var(--crit); }
+  .card.high { border-left-color:var(--high); } .card.high .num { color:var(--high); }
+  .card.med  { border-left-color:var(--med);  } .card.med .num  { color:#b7950b; }
+  .card.low  { border-left-color:var(--low);  } .card.low .num  { color:var(--low); }
+  .riskbig { font-size:46px; font-weight:800; }
+  table { width:100%; border-collapse:collapse; margin-top:10px; font-size:13px; }
+  th, td { text-align:left; padding:9px 10px; border-bottom:1px solid #ecf0f1; }
+  th { background:#f0f3f6; font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:#566573; }
+  tr:hover td { background:#fafbfc; }
+  .badge { display:inline-block; padding:2px 9px; border-radius:12px; color:#fff; font-size:11px; font-weight:600; }
+  .pass { color:#27ae60; font-weight:600; } .fail { color:var(--crit); font-weight:600; }
+  .bar { height:10px; border-radius:6px; background:#ecf0f1; overflow:hidden; }
+  .bar > span { display:block; height:100%; background:#27ae60; }
+  footer { text-align:center; color:#95a5a6; font-size:12px; padding:20px; }
+  .muted { color:#95a5a6; font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Guardian USB — Vulnerability Management Report</h1>
+  <div class="sub">Generated: {{ generated_at }} &nbsp;|&nbsp; Scope: {{ scope | default('All assets') }}</div>
+</header>
+<main>
+
+  <section>
+    <h2>Executive Summary</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="lbl">Overall Risk</div>
+        <div class="riskbig" style="color:{{ overall_risk | sev_color if overall_risk is string else '#c0392b' }}">
+          {{ '%.1f'|format(summary.overall_risk_score|default(0.0)) }}
+        </div>
+        <div class="muted">/ 10.0</div>
+      </div>
+      <div class="card"><div class="lbl">Assets</div><div class="num">{{ summary.asset_count|default(0) }}</div></div>
+      <div class="card crit"><div class="lbl">Critical</div><div class="num">{{ severity_counts.Critical|default(0) }}</div></div>
+      <div class="card high"><div class="lbl">High</div><div class="num">{{ severity_counts.High|default(0) }}</div></div>
+      <div class="card med"><div class="lbl">Medium</div><div class="num">{{ severity_counts.Medium|default(0) }}</div></div>
+      <div class="card low"><div class="lbl">Low</div><div class="num">{{ severity_counts.Low|default(0) }}</div></div>
+    </div>
+  </section>
+
+  {% if trend %}
+  <section>
+    <h2>Trend Summary</h2>
+    <table>
+      <tr><th>Metric</th><th>Previous</th><th>Current</th><th>Change</th></tr>
+      {% for row in trend %}
+      <tr>
+        <td>{{ row.metric }}</td><td>{{ row.previous }}</td><td>{{ row.current }}</td>
+        <td>{{ row.change }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% endif %}
+
+  <section>
+    <h2>Top {{ top_findings|length }} Critical Findings</h2>
+    {% if top_findings %}
+    <table>
+      <tr><th>#</th><th>Title</th><th>Asset</th><th>Severity</th><th>Risk</th><th>Type</th><th>Status</th></tr>
+      {% for f in top_findings %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ f.title }}</td>
+        <td>{{ f.asset|default(f.asset_id) }}</td>
+        <td><span class="badge" style="background:{{ f.severity | sev_color }}">{{ f.severity }}</span></td>
+        <td><strong>{{ '%.1f'|format(f.risk_score|default(0.0)) }}</strong></td>
+        <td>{{ f.finding_type }}</td>
+        <td>{{ f.status }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}<p class="muted">No findings recorded.</p>{% endif %}
+  </section>
+
+  <section>
+    <h2>Asset Inventory</h2>
+    {% if assets %}
+    <table>
+      <tr><th>Hostname</th><th>IP</th><th>OS</th><th>Type</th><th>Criticality</th><th>Internet-Facing</th></tr>
+      {% for a in assets %}
+      <tr>
+        <td>{{ a.hostname|default('-') }}</td>
+        <td>{{ a.ip_address|default('-') }}</td>
+        <td>{{ a.os_name|default('-') }} {{ a.os_version|default('') }}</td>
+        <td>{{ a.asset_type|default('-') }}</td>
+        <td>{{ a.criticality }}</td>
+        <td>{{ 'Yes' if a.is_internet_facing else 'No' }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}<p class="muted">No assets in inventory.</p>{% endif %}
+  </section>
+
+  {% if compliance %}
+  <section>
+    <h2>Compliance Status</h2>
+    {% if compliance_summary %}
+    <p>Pass rate: <strong>{{ compliance_summary.pass_rate }}%</strong>
+       ({{ compliance_summary.passed }}/{{ compliance_summary.total }} rules passed)</p>
+    <div class="bar"><span style="width:{{ compliance_summary.pass_rate }}%"></span></div>
+    {% endif %}
+    <table>
+      <tr><th>Framework</th><th>Rule</th><th>Name</th><th>Result</th><th>Details</th></tr>
+      {% for c in compliance %}
+      <tr>
+        <td>{{ c.framework }}</td>
+        <td>{{ c.rule_id }}</td>
+        <td>{{ c.rule_name }}</td>
+        <td class="{{ 'pass' if c.passed else 'fail' }}">{{ 'PASS' if c.passed else 'FAIL' }}</td>
+        <td class="muted">{{ c.details }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% endif %}
+
+</main>
+<footer>Guardian USB Vulnerability Management Platform &middot; {{ generated_at }}</footer>
+</body>
+</html>
