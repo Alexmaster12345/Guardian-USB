@@ -65,19 +65,6 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned  # once
 
 ---
 
-### Run with Docker
-
-```bash
-cp .env.example .env
-# Set GUARDIAN_API_KEY in .env
-
-docker compose up -d
-```
-
-API available at `http://localhost:8000`
-
----
-
 ### Run locally (development)
 
 ```bash
@@ -209,8 +196,6 @@ Guardian-USB/
 │   ├── reports/               # Generated reports
 │   └── vuln_db/               # Offline CVE data
 ├── tests/                     # pytest test suite
-├── Dockerfile
-├── docker-compose.yml
 └── .env.example
 ```
 
